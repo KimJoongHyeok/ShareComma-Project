@@ -27,4 +27,22 @@ public class MemberDAO {
 			rs.close();
 		closeAll(pstmt, con);
 	}
+	public void registerMember(MemberVO mvo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = dataSource.getConnection();
+			String sql = "insert into member values(?,?,?,?,?,sysdate,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mvo.getId());
+			pstmt.setString(2, mvo.getPassword());
+			pstmt.setString(3, mvo.getName());
+			pstmt.setString(4, mvo.getPhone());
+			pstmt.setString(5, mvo.getNickName());
+			pstmt.setString(6, mvo.getStatus());
+			pstmt.executeUpdate();
+		}finally {
+			closeAll(pstmt, con);
+		}
+	}
 }
