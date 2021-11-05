@@ -1,0 +1,11 @@
+@charset "UTF-8";
+.header{
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+.title{
+	width: 50%
+}
+.boardlist th,.boardlist td,.btnArea,.pagingArea{
+	text-align: center;
+}
