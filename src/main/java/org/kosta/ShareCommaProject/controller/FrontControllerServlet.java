@@ -17,13 +17,13 @@ public class FrontControllerServlet extends HttpServlet {
 	protected void doDispatch(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-		String uri=request.getRequestURI();//  /webstudy27-jstl-member/FindMemberByIdController.do
-		String contextPath=request.getContextPath();//  /webstudy27-jstl-member
+		String uri=request.getRequestURI();
+		String contextPath=request.getContextPath();
 		String command=uri.substring(contextPath.length()+1, uri.length()-3);//Controller class명만 추출 : FindMemberByIdController
 		Controller controller=HandlerMapping.getInstance().create(command);
 		String path=controller.execute(request, response);
 		if(path.startsWith("redirect:")) {
-			response.sendRedirect(path.substring(9));// redirect: 을 제외한 경로로 이동시킨다 
+			response.sendRedirect(path.substring(9));
 		}else {
 			request.getRequestDispatcher(path).forward(request, response);
 		}
