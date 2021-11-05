@@ -1,21 +1,16 @@
 package org.kosta.ShareCommaProject.model;
 
 public class ReservationVO {
-	private String reservationNo;
+
 	private String checkIn;
 	private String checkOut;
 	private int countPerson;
 	private String reservDate;
 	private MemberVO memberVO; //누가 에약을 햇는지에 대한 정보
 	private HouseVO houseVO;
-	public ReservationVO() {
+	public ReservationVO(String checkIn, String checkOut, int countPerson, String reservDate, MemberVO memberVO,
+			HouseVO houseVO) {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-	public ReservationVO(String reservationNo, String checkIn, String checkOut, int countPerson, String reservDate,
-			MemberVO memberVO, HouseVO houseVO) {
-		super();
-		this.reservationNo = reservationNo;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.countPerson = countPerson;
@@ -23,11 +18,9 @@ public class ReservationVO {
 		this.memberVO = memberVO;
 		this.houseVO = houseVO;
 	}
-	public String getReservationNo() {
-		return reservationNo;
-	}
-	public void setReservationNo(String reservationNo) {
-		this.reservationNo = reservationNo;
+	public ReservationVO() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public String getCheckIn() {
 		return checkIn;
@@ -67,9 +60,9 @@ public class ReservationVO {
 	}
 	@Override
 	public String toString() {
-		return "ReservationVO [reservationNo=" + reservationNo + ", checkIn=" + checkIn + ", checkOut=" + checkOut
-				+ ", countPerson=" + countPerson + ", reservDate=" + reservDate + ", memberVO=" + memberVO
-				+ ", houseVO=" + houseVO + "]";
+		return "ReservationVO [checkIn=" + checkIn + ", checkOut=" + checkOut + ", countPerson=" + countPerson
+				+ ", reservDate=" + reservDate + ", memberVO=" + memberVO + ", houseVO=" + houseVO + "]";
 	}
+	
 	
 }
