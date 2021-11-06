@@ -57,8 +57,7 @@ public class UpdateHouseController implements Controller {
 		System.out.println(orgName + "," + filename + "," + fileSize);
 		System.out.println("++++++++++++++++++");
 		System.out.println(savePath);
-
-
+		
 		hvo=new HouseVO(id,name,address,content,null,null,null,null);
 
 		/*
@@ -72,9 +71,6 @@ public class UpdateHouseController implements Controller {
 		HouseBoardDAO.getInstance().updateHouse(hvo);
 		System.out.println("update house 완료");
 
-		 
-		
-
 //		return "redirect:"+contr+"Controller.do?postNo="+pvo.getPostNo()+"&fileName="+Ivo.getFileName();
 		
 		
@@ -83,15 +79,7 @@ public class UpdateHouseController implements Controller {
 //		return "redirect:fileout.jsp";//->request값 전달 불가 쿼리스트링 이용바람
 //		return "redirect:fileout.jsp";//->request값 전달 불가 쿼리스트링 이용바람
 	}
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			
 	}
 
 }
