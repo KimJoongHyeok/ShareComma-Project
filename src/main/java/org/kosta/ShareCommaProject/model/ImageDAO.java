@@ -79,4 +79,28 @@ public class ImageDAO {
 		}
 		return Ivo;
 	}
+	
+	
+	public void updateImage(HouseVO hvo, String orgname, String filename, String filepath, long fileSize)
+			throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = dataSource.getConnection();
+			String sql = "update house_image set orgname =?, filename=?, filepath=?, filesize=? where house_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, orgname);
+			pstmt.setString(2, filename);
+			pstmt.setString(3, filepath);
+			pstmt.setLong(4, fileSize);
+			pstmt.setString(5, hvo.getHouseId());
+			
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(con, pstmt);
+			
+		}
+		System.out.println("이미지 업데이트");
+	}
+	
 }
