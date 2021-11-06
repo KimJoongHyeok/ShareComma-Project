@@ -11,18 +11,22 @@
 <body>
 
 
+
 	<form action="RegisterHouseController.do" method="post"  enctype="multipart/form-data">
-		<input type="text" name="name" required="required" /> 
-		<input type="text" name="address" required="required" /> 
+		<input type="text" name="name" required="required"  placeholder="숙소이름"/> 
+		<input type="text" name="address" required="required" placeholder="숙소주소"/> 
 		<input type="file" name="filename" />
 		<hr>
+		<textarea rows="10" class="form-control" name="content" placeholder="집소개" required="required"></textarea>
 
 		<button type="submit">등록</button>
-		<button type="reset" class="btn btn-outline-primary">취소</button>
-		<textarea rows="10" class="form-control" name="content"
-			placeholder="집소개" required="required"></textarea>
+		<button type="reset" >취소</button>
+		
 	</form>
-
+	
+	
+	
+	
 	<img		src="${pageContext.request.contextPath}/upload/${requestScope.ivo.fileName}"	height="280" width="180" />
 	<br />
 	--------------------------------------------------------------------------------

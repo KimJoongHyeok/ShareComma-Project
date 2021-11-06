@@ -58,6 +58,7 @@ public class RegisterHouseController implements Controller {
 				System.out.println(savePath);
 			try {
 				multi = new MultipartRequest(request, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
+				System.out.println("test 값:"+multi.getParameter("name"));
 				System.out.println("file저장 실행");
 				System.out.println("try문");
 			} catch (Exception e) {
