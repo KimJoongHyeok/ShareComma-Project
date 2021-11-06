@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:choose>
-	<c:when test="${sessionScope.mvo==null}">
+	<c:when test="${sessionScope.mvo == null}">
 		<a href="HouseListController.do">홈</a><br><br>
  		<form method="post" action="LoginController.do">
 		 	<input type="text" name="id" placeholder="아이디" size="12">
@@ -13,6 +13,20 @@
     	<a href = "RegisterMemberFormController.do">회원가입</a>
  	</c:when>
  	<c:otherwise>
-	 	
+ 		<%-- 로그인됏을 경우 --%>
+ 		<a href="HouseListController.do">홈</a><br><br>
+	 	<a href = "UpdateMemberFormController.do">회원정보수정</a> &nbsp;
+	 	${sessionScope.mvo.name } 님&nbsp;
+	
+	 	<script>
+	 		function logout(){
+	 			let result=confirm("로그아웃하시겠습니까?");
+	 			if(result){
+	 			document.getElementById("logoutForm").submit();
+	 			}
+	 		}
+	 	</script> 	
+	 	<a href="javascript:logout()">로그아웃</a>&nbsp;&nbsp;
+	 	<form action="LogoutController.do" method="post" id="logoutForm"></form>
  	</c:otherwise>
 </c:choose>
