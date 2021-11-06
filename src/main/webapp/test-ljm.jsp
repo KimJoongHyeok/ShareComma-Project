@@ -33,6 +33,10 @@
 
  	성공<br />
 	${pageContext.request.contextPath}/upload/${requestScope.ivo.fileName}
-
+	-----------------------------------------------------------------------------------
+	
+	<form action="ReservateHouseFormController.do?hid=2" method="post">
+			<button type="submit">예약</button>
+		</form>
 </body>
 </html>
