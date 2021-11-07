@@ -45,4 +45,38 @@ public class MemberDAO {
 			closeAll(pstmt, con);
 		}
 	}
+	public void deleteMember(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = dataSource.getConnection();
+			String sql = "update member set member_status = 'sleep' where member_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		}finally {
+			closeAll(pstmt, con);
+		}
+	}
+	public void updateMember(MemberVO mvo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = dataSource.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("update member set member_password = ?,member_name = ?,member_phone = ?, ");
+			sql.append("member_nickname = ? where member_id = ? ");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, mvo.getPassword());
+			pstmt.setString(2, mvo.getName());
+			pstmt.setString(3, mvo.getPhone());
+			pstmt.setString(4, mvo.getNickName());
+			pstmt.setString(5, mvo.getId());
+			pstmt.executeUpdate();
+			
+		}finally {
+			closeAll(pstmt, con);
+		}
+		
+	}
 }
