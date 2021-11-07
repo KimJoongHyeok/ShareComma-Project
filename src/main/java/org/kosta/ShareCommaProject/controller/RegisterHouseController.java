@@ -1,13 +1,20 @@
 package org.kosta.ShareCommaProject.controller;
 
 import java.io.File;
+ 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.kosta.ShareCommaProject.model.HouseBoardDAO;
 import org.kosta.ShareCommaProject.model.HouseVO;
 import org.kosta.ShareCommaProject.model.ImageDAO;
 import org.kosta.ShareCommaProject.model.ImageVO;
+import org.kosta.ShareCommaProject.model.MemberVO;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -23,31 +30,37 @@ public class RegisterHouseController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-//		HttpSession session = request.getSession(false);
-//		if (request.getMethod().equals("POST") == false) {
-//			System.out.println("낫포스트");
-//			return "redirect:index.jsp";
-//		} else {
+		HttpSession session = request.getSession(false);
+		if (request.getMethod().equals("POST") == false) {
+			System.out.println("낫포스트");
+			return "redirect:index.jsp";
+		} else {
 		//session 있을경우 
 			MultipartRequest multi = null;
+			HouseVO hvo=null;
 			int sizeLimit = 10 * 1024 * 1024;
+			//현재시간
+			LocalTime now = LocalTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmmss");
+			String formatedNow = now.format(formatter);
+			Random ran=new Random();
+			String sran=String.valueOf(ran.nextLong());
+			//filename+formatedNow+ran
 			
-			
+			MemberVO mvo=(MemberVO)session.getAttribute("mvo");
 			//login Session.mvo MemberVO 값받아오기 이후 수정
 //			HouseVO hvo=new HouseVO("1",request.getParameter("name"),request.getParameter("address"),request.getParameter("content"),null,null,null,(MemberVO)request.getSession(false).getAttribute("mvo"));
-			HouseVO hvo=new HouseVO("1",request.getParameter("name"),request.getParameter("address"),request.getParameter("content"),null,null,null,null);
-			 
-			System.out.println("++++++++"+hvo.getHouseAddress()+"+++++++++++++++++");//null값나옴
-			//-------------------------------------------------
 			
-//			HouseBoardDAO.getInstance().registHouse(hvo);
+			
 			
 			//---------------------------------------------------
 			
-			String savePath = request.getServletContext().getRealPath("upload");
+			String savePath = request.getServletContext().getRealPath("image");
 				System.out.println(savePath);
 			try {
 				multi = new MultipartRequest(request, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
+				hvo=new HouseVO("null",multi.getParameter("name"),multi.getParameter("address"),multi.getParameter("content"),null,null,null,mvo);
+				 
 				System.out.println("test 값:"+multi.getParameter("name"));
 				System.out.println("file저장 실행");
 				System.out.println("try문");
@@ -59,6 +72,14 @@ public class RegisterHouseController implements Controller {
 //--------------------------------------------------------------------------------------------------------
 
 			String filename = multi.getFilesystemName("filename");// 저장된 파일명
+			
+			String t1=filename.substring(0,filename.lastIndexOf("."));
+			String t2=filename.substring(filename.lastIndexOf("."), filename.length());
+			String ssran =sran.substring(5);
+ 
+			filename=t1+formatedNow+ssran+t2;
+			
+			
 			/*
 			 * 만약 filename이 없다면 파일이 없는거임. 따라서 아래 else구문의 multi 객체를 통해 orgName(원래파일명)과
 			 * fileSize등을 통해 filedb에 file관련 값들을 넣어줄 필요없으므로 바로 redirect를 통해
@@ -67,6 +88,8 @@ public class RegisterHouseController implements Controller {
 			if (filename == null || filename == "") {
 				return "redirect:error.jsp";
 			} else {
+				File file=multi.getFile("filename");
+				file.renameTo(new File (savePath+"/"+t1+formatedNow+ssran+t2));
 				String orgName = multi.getOriginalFileName("filename");
 				long fileSize = multi.getFile("filename").length();
 				System.out.println(orgName + "," + filename + "," + fileSize);
@@ -76,7 +99,16 @@ public class RegisterHouseController implements Controller {
 				/*
 				 * inserFile메서드를 통해 filedb에 db정보들을 삽입 시킴.
 				 */
-			 
+				
+				
+				System.out.println(hvo);
+				System.out.println("++++++++"+hvo.getHouseAddress()+"+++++++++++++++++");//null값나옴
+				//-------------------------------------------------
+				
+				HouseBoardDAO.getInstance().registHouse(hvo);
+				hvo.setHouseId(HouseBoardDAO.getInstance().getHouseId());			
+				
+			 //---------------------------------------------------------------
 				ImageDAO.getInstance().insertImage(hvo,orgName, filename, savePath, fileSize);
 				System.out.println("upload완료");
 				// filedb 모두 조회.
@@ -90,8 +122,8 @@ public class RegisterHouseController implements Controller {
 				ImageVO Ivo = new ImageVO();
 				Ivo = ImageDAO.getInstance().getImage(hvo);
 				
-				File file = multi.getFile("filename");
-				System.out.println(file);
+				
+				
 				System.out.println("***********************");
 				
 				System.out.println("**이상확인*********************");
@@ -107,10 +139,10 @@ public class RegisterHouseController implements Controller {
 				
 				
 //				이후 경로 수정 
-				return "test-ljm.jsp";
+				return "redirect:HouseListController.do";
 //				return "redirect:fileout.jsp";//->request값 전달 불가 쿼리스트링 이용바람
 //				return "redirect:fileout.jsp";//->request값 전달 불가 쿼리스트링 이용바람
 			}
 		}
 	}
-//}
+}
