@@ -27,6 +27,31 @@ public class MemberDAO {
 			rs.close();
 		closeAll(pstmt, con);
 	}
+	public MemberVO login(String id, String password) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberVO mvo = null;
+		try {
+			con = dataSource.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("select member_id,member_password,member_name,member_phone, ");
+			sql.append("member_nickname,to_char(member_regdate,'yyyy.mm.dd hh24:mi:ss'),member_status ");
+			sql.append("from member ");
+			sql.append("where member_id = ? and member_password = ? ");
+			sql.append("and member_status != 'sleep' ");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				mvo = new MemberVO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return mvo;
+	}
 	public void registerMember(MemberVO mvo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
