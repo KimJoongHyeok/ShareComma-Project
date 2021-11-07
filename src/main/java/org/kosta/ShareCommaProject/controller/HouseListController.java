@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.ShareCommaProject.model.HouseBoardDAO;
 import org.kosta.ShareCommaProject.model.HouseVO;
+import org.kosta.ShareCommaProject.model.ImageDAO;
 
 public class HouseListController implements Controller {
 
