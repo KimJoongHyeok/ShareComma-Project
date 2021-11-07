@@ -102,6 +102,5 @@ public class MemberDAO {
 		}finally {
 			closeAll(pstmt, con);
 		}
-		
 	}
 }

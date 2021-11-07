@@ -17,15 +17,15 @@
 		<div class="container-fluid">
 			<div class="row header"> <%-- row에 css 적용시킨거 --%>
 				<div class="col-sm-8 offset-sm-2" align="right">
-				<c:import url="header.jsp"></c:import>
+					<c:import url="header.jsp"></c:import>
 				</div>
 			</div>	
 			<%-- 상단부 헤더 row div --%>
 			<%-- 메인화면 --%>
 			<div class="row">
-				<div class="col-sm-8 offset-sm-2" align="center"> <%-- 건너뜀 --%>
-				<%-- 컨트롤러에서 request에 할당한 url을 이용해 import 한다 --%>
-				<c:import url="${requestScope.url}"/>	
+				<div class="col-sm-8 offset-sm-2"> <%-- 건너뜀 --%>
+					<%-- 컨트롤러에서 request에 할당한 url을 이용해 import 한다 --%>
+					<c:import url="${requestScope.url}"/>	
 				</div>
 			</div>
 			<%-- 메인화면 row div --%>

@@ -37,7 +37,7 @@
 	-----------------------------------------------------------------------------------
 	
 	<form action="ReservateHouseFormController.do?hid=2" method="post">
-			<button type="submit">예약</button>
+		<button type="submit">예약</button>
 	</form>
 
 	<br />

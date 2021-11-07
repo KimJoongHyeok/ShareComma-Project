@@ -1,17 +1,13 @@
 package org.kosta.ShareCommaProject.controller;
 
 import java.io.File;
- 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.kosta.ShareCommaProject.model.HouseBoardDAO;
 import org.kosta.ShareCommaProject.model.HouseVO;
 import org.kosta.ShareCommaProject.model.ImageDAO;
 import org.kosta.ShareCommaProject.model.ImageVO;
- 
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -46,12 +42,6 @@ public class RegisterHouseController implements Controller {
 			
 //			HouseBoardDAO.getInstance().registHouse(hvo);
 			
-			
-			
-			
-			
-			
-			
 			//---------------------------------------------------
 			
 			String savePath = request.getServletContext().getRealPath("upload");
@@ -83,8 +73,6 @@ public class RegisterHouseController implements Controller {
 				System.out.println("++++++++++++++++++");
 				System.out.println(savePath);
 
-				
-
 				/*
 				 * inserFile메서드를 통해 filedb에 db정보들을 삽입 시킴.
 				 */
@@ -105,7 +93,6 @@ public class RegisterHouseController implements Controller {
 				File file = multi.getFile("filename");
 				System.out.println(file);
 				System.out.println("***********************");
-			 
 				
 				System.out.println("**이상확인*********************");
 				System.out.println("filePath:"+Ivo.getFilePath().toString());//file Path확인
@@ -114,10 +101,7 @@ public class RegisterHouseController implements Controller {
 				System.out.println("fileOrgName:"+Ivo.getOrgName().toString());//file Path확인
 				System.out.println("***********************");
 				
-
 				request.setAttribute("ivo", Ivo);//redirect시 쿼리스트링 이용해야댐 중요 x1000
-				
-				
 
 //				return "redirect:"+contr+"Controller.do?postNo="+pvo.getPostNo()+"&fileName="+Ivo.getFileName();
 				
