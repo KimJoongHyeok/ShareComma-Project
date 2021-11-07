@@ -17,7 +17,7 @@ public class ReservateHouseFormController implements Controller {
 		request.setAttribute("hid", request.getParameter("hid"));
 		
 		return "layout.jsp";
- 
+		
 	}
 
 }
