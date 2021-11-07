@@ -32,8 +32,6 @@ public class HouseBoardDAO {
 		closeAll(pstmt, con);
 	}
 	
-
-
 	public void registHouse(HouseVO hvo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
