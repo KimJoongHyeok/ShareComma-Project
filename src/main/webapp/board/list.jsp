@@ -17,7 +17,9 @@
 		<tbody>
 			<c:forEach items="${requestScope.list}" var="hvo">
 				<tr>
-					<td><img src="image/cinqueterre.jpg" class="rounded" alt="Cinque Terre"width="300" height="200"></td>
+					<td>
+						 <img src="${pageContext.request.contextPath}/image/${hvo.imageVO.fileName}" height="280" width="180" /> 
+ 					</td>
 					<td>
 						<c:choose>
 							<c:when test="${sessionScope.mvo!=null}">
