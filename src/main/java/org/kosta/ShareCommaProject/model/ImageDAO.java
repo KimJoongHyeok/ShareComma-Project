@@ -34,16 +34,16 @@ public class ImageDAO {
 		closeAll(con, pstmt);
 	}
 	
-	public void insertImage(HouseVO vo, String orgname, String filename, String filepath, long fileSize)
+	public void insertImage(HouseVO hvo,String orgname, String filename, String filepath, long fileSize)
 			throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = dataSource.getConnection();
 			String sql = "insert into house_image  values (seq_house_image.nextval,?,?,?,?,?)";
-			pstmt = con.prepareStatement(sql);
-//			pstmt.setString(1, vo.getHouseId());
-			pstmt.setString(1, "1");	// seq
+			pstmt = con.prepareStatement(sql); 
+			
+			pstmt.setString(1, hvo.getHouseId());
 			pstmt.setString(2, orgname);
 			pstmt.setString(3, filename);
 			pstmt.setString(4, filepath);
@@ -57,7 +57,7 @@ public class ImageDAO {
 		System.out.println("이미지 업로드");
 	}
 
-	public ImageVO getImage(HouseVO vo) throws SQLException {
+	public ImageVO getImage(HouseVO hvo) throws SQLException {
 	
 		ImageVO Ivo = null;
 		Connection con = null;
@@ -66,12 +66,13 @@ public class ImageDAO {
 		try {
 			System.out.println("getImage()시작");
 			con = dataSource.getConnection();
-			String sql="select  orgname,filename,filepath from house_image where house_id='1'";
+			String sql="select  orgname,filename,filepath from house_image where house_id=?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, hvo.getHouseId());
 			
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				Ivo=new ImageVO(vo,rs.getString(1),rs.getString(2),rs.getString(3),null);
+				Ivo=new ImageVO(hvo,rs.getString(1),rs.getString(2),rs.getString(3),null);
 				System.out.println(Ivo);
 			}
 		} finally {
