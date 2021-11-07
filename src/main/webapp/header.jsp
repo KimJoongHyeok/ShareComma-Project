@@ -17,7 +17,9 @@
  		<a href="HouseListController.do">홈</a><br><br>
 	 	<a href = "UpdateMemberFormController.do">회원정보수정</a> &nbsp;
 	 	${sessionScope.mvo.name } 님&nbsp;
-	
+		<c:if test="${sessionScope.mvo.status eq 'HOST'}">
+	 		<a href="RegisterHouseFormController.do?mid=${sessionScope.mvo.id }" >집등록하기</a>	 	
+	 	</c:if>
 	 	<script>
 	 		function logout(){
 	 			let result=confirm("로그아웃하시겠습니까?");
