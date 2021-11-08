@@ -17,7 +17,7 @@ public class LoginController implements Controller {
 		if(mvo==null) {
 			return "redirect:member/login-fail.jsp";
 		}else {
-			HttpSession session = request.getSession(false);
+			HttpSession session = request.getSession();
 			//로그인 인증 정보 할당
 			session.setAttribute("mvo", mvo);
 			return "redirect:HouseListController.do";
