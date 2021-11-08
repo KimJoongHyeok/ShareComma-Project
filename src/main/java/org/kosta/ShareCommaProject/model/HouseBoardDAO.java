@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -110,6 +111,40 @@ public class HouseBoardDAO {
 		}
 		System.out.println("하우스 업데이트 완료");
 
+	}
+
+	public ArrayList<HouseVO> getHouseList() throws SQLException {
+		ArrayList<HouseVO>list = new ArrayList<HouseVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = dataSource.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("select h.house_id,h.house_name,h.house_address,h.house_content, ");
+			sql.append("to_char(h.house_time_posted,'yyyy.mm.dd'),m.member_name ");
+			sql.append("from house h,member m ");
+			sql.append("where m.member_id = h.member_id ");
+			sql.append("order by h.house_id asc");
+			pstmt = con.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				HouseVO hvo = new HouseVO();
+				hvo.setHouseId(rs.getString("house_id"));
+				hvo.setHouseName(rs.getString("house_name"));
+				hvo.setHouseAddress(rs.getString("house_address"));
+				hvo.setHouseContent(rs.getString("house_content"));
+				//hvo.setHouseTimePosted(rs.getString("house_time_posted"));
+				hvo.setHouseHits(null);
+				MemberVO mvo = new MemberVO();
+				mvo.setName(rs.getString("member_name"));
+				hvo.setMemberVO(mvo);
+				list.add(hvo);
+			}
+		}finally {
+			closeAll(pstmt, con);
+		}
+		return list;
 	}
 
 }
