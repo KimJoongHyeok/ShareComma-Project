@@ -111,11 +111,11 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="select count(*) from mvc_member where id=?";
+			String sql="select count(*) from member where member_id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
-			if(rs.next()&&rs.getInt(1)==1) 
+			if(rs.next() && rs.getInt(1)==1) 
 				result=true; 
 		}finally {
 			closeAll(rs, pstmt, con);
