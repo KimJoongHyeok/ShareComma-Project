@@ -55,7 +55,9 @@ public class RegisterHouseController implements Controller {
 			
 			//---------------------------------------------------
 			
-			String savePath = request.getServletContext().getRealPath("image");
+//			String savePath = request.getServletContext().getRealPath("image");
+			String savePath= "C:/kosta224/web-workspace2/ShareComma-Project/src/main/webapp/upload/";
+			
 				System.out.println(savePath);
 			try {
 				multi = new MultipartRequest(request, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
@@ -89,13 +91,15 @@ public class RegisterHouseController implements Controller {
 				return "redirect:error.jsp";
 			} else {
 				File file=multi.getFile("filename");
+				 
+				
 				file.renameTo(new File (savePath+"/"+t1+formatedNow+ssran+t2));
 				String orgName = multi.getOriginalFileName("filename");
 				long fileSize = multi.getFile("filename").length();
 				System.out.println(orgName + "," + filename + "," + fileSize);
 				System.out.println("++++++++++++++++++");
 				System.out.println(savePath);
-
+				 
 				/*
 				 * inserFile메서드를 통해 filedb에 db정보들을 삽입 시킴.
 				 */
