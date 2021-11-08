@@ -1,6 +1,9 @@
 package org.kosta.ShareCommaProject.controller;
 
 import java.io.File;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +23,8 @@ public class UpdateHouseController implements Controller {
 		// TODO Auto-generated method stub
 		MultipartRequest multi = null;
 		int sizeLimit=10*1024*1024;
-		String savePath = request.getServletContext().getRealPath("upload");
+		String savePath= "C:/kosta224/web-workspace2/ShareComma-Project/src/main/webapp/upload/";
+		
 		System.out.println(savePath);
 		HouseVO hvo=null;
 		String id=null;
@@ -53,6 +57,11 @@ public class UpdateHouseController implements Controller {
 		return "redirect:error.jsp";
 	} else {
 		String orgName = multi.getOriginalFileName("filename");
+		LocalTime now = LocalTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmmss");
+		String formatedNow = now.format(formatter);
+		Random ran=new Random();
+		String sran=String.valueOf(ran.nextLong());
 		long fileSize = multi.getFile("filename").length();
 		System.out.println(orgName + "," + filename + "," + fileSize);
 		System.out.println("++++++++++++++++++");
