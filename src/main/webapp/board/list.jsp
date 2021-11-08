@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <h1>숙소리스트</h1>
 <br>
 <div class="container">
@@ -18,7 +19,8 @@
 			<c:forEach items="${requestScope.list}" var="hvo">
 				<tr>
 					<td>
-						 <img src="${pageContext.request.contextPath}/image/${hvo.imageVO.fileName}" height="280" width="180" /> 
+					    <img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}"   onerror="this.src='${pageContext.request.contextPath}/image/imguploadzhong.jpg'"  height="280" width="180" /> 
+					     
  					</td>
 					<td>
 						<c:choose>
