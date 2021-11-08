@@ -1,5 +1,6 @@
 package org.kosta.ShareCommaProject.controller;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,10 @@ public class LoginController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		if(request.getMethod().equals("POST")==false)
+			throw new ServletException("로그인은 post방식만 가능합니다!");
+		
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		MemberVO mvo = MemberDAO.getInstance().login(id,password);
