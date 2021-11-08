@@ -103,4 +103,23 @@ public class MemberDAO {
 			closeAll(pstmt, con);
 		}
 	}
+	
+	public boolean checkId(String id) throws SQLException {
+		boolean result=false;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="select count(*) from mvc_member where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()&&rs.getInt(1)==1) 
+				result=true; 
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return result; 
+	}
 }
