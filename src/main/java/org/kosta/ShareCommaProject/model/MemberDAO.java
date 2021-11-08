@@ -122,4 +122,40 @@ public class MemberDAO {
 		}
 		return result; 
 	}
+	public void becomeHost(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = dataSource.getConnection();
+			String sql ="update member set member_status='HOST' where member_id= ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		}finally {
+			closeAll(pstmt, con);
+		}
+	}
+	public MemberVO getMemberById(String id) throws SQLException {	
+		MemberVO mvo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = dataSource.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("select member_id,member_password,member_name,member_phone, ");
+			sql.append("member_nickname,to_char(member_regdate,'yyyy.mm.dd hh24:mi:ss'),member_status ");
+			sql.append("from member ");
+			sql.append("where member_id = ?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				mvo = new MemberVO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return mvo;
+	}
 }
