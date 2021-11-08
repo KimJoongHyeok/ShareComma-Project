@@ -4,7 +4,7 @@
 	<form action="RegisterHouseController.do" method="post"  enctype="multipart/form-data">
 		<input type="text" name="name" required="required"  placeholder="숙소이름"/> <br />
 		<input type="text" name="address" required="required" placeholder="숙소주소"/> <br />
-		<input type="file" name="filename" /><br />
+		<input type="file" name="filename"  required="required"/><br />
 		<textarea rows="10" class="form-control" name="content" placeholder="집소개" required="required"></textarea>
 		<hr>
 	
