@@ -25,7 +25,7 @@
 			<%-- 상단부 헤더 row div --%>
 			<%-- 메인화면 --%>
 			<div class="row">
-				<div class="col-sm-8 offset-sm-2"> <%-- 건너뜀 --%>
+				<div class="col-sm-8 offset-sm-2" align="center"> <%-- 건너뜀 --%>
 					<%-- 컨트롤러에서 request에 할당한 url을 이용해 import 한다 --%>
 					<c:import url="${requestScope.url}"/>	
 				</div>
