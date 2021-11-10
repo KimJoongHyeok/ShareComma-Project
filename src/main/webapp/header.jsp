@@ -57,7 +57,7 @@
 								<ul class="navbar-nav">
 									<li class="nav-item active"><a class="nav-link" href="HouseListController.do">홈</a></li>
 									<li class="nav-item "><a class="nav-link" href="RegisterMemberFormController.do">회원가입</a></li>
-									<li class="nav-item "><a class="nav-link" href="LoginFormController.do">로그인</a></li>
+									<li class="nav-item "><a class="nav-link" href="LoginFormController.do"><i class="fa fa-user"></i>&nbsp; 로그인</a></li>
 								</ul>
 								<!--Main navigation list-->
 							</c:when>
@@ -71,7 +71,7 @@
 										</c:if>
 										<li class="nav-item "><a class="nav-link" href="UpdateMemberFormController.do">회원정보수정</a></li>
 										<li class="nav-item "><a class="nav-link" href="javascript:logout()">로그아웃</a></li>
-										<li class="nav-item btn btn-primary text-caps btn-rounded btn-framed"><b>${sessionScope.mvo.name }
+										<li class="nav-item btn btn-primary text-caps btn-rounded btn-framed"><b><i class="fa fa-user"></i> &nbsp; ${sessionScope.mvo.name }
 												님</b></li>
 									</ul>
 									<script>
