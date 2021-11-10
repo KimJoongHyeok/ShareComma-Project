@@ -69,7 +69,7 @@
 										<c:if test="${sessionScope.mvo.status eq 'HOST'}">
 											<li class="nav-item "><a class="nav-link" href="#">숙소등록</a></li>
 										</c:if>
-										<li class="nav-item "><a class="nav-link" href="#">회원정보수정</a></li>
+										<li class="nav-item "><a class="nav-link" href="UpdateMemberFormController.do">회원정보수정</a></li>
 										<li class="nav-item "><a class="nav-link" href="javascript:logout()">로그아웃</a></li>
 										<li class="nav-item btn btn-primary text-caps btn-rounded btn-framed"><b>${sessionScope.mvo.name }
 												님</b></li>
