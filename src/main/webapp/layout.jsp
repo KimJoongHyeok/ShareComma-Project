@@ -5,21 +5,23 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="css/myhome.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="author" content="ThemeStarz">
+		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Varela+Round" rel="stylesheet">
+		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
+		<link rel="stylesheet" href="assets/fonts/font-awesome.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/selectize.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="assets/css/user.css">
 	<title>[ Share, ] </title>
 	</head>
 	<body>
 		<div class="container-fluid">
-			<div class="row header"> <%-- row에 css 적용시킨거 --%>
-				<div class="col-sm-8 offset-sm-2" align="right">
+<%-- 			<div class="row header"> row에 css 적용시킨거
+				<div class="col-sm-8 offset-sm-2" align="right"> --%>
 					<c:import url="header.jsp"></c:import>
-				</div>
-			</div>	
+<!-- 				</div>
+			</div>	 -->
 			<%-- 상단부 헤더 row div --%>
 			<%-- 메인화면 --%>
 			<div class="row">
