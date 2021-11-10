@@ -16,7 +16,7 @@ public class IdCheckController implements Controller {
 		if(idCheck) {//중복되는 아이디 존재.
 			 info = "아이디가 중복됨!"; 
 		}else {
-			 info = "아이디가 중복되지 않았습니다. 사용가능합니다.";
+			 info = "사용가능한 아이디입니다.";
 		}
 	request.setAttribute("responsebody", info);
 	return "AjaxView";

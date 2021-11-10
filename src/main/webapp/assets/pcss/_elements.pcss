@@ -1,0 +1,145 @@
+a {
+  color: $color-black; transition: .3s color ease, .3s background-color ease, .3s box-shadow ease;
+  &:hover, &:focus, &:active {
+    outline: none !important; text-decoration: none;
+  }
+  &:hover {
+    color: $color-default;
+  }
+  &.icon {
+    i {
+      color: $color-default; margin-right: 1rem; font-size: 1.2rem;
+    }
+  }
+  &.underline {
+    &:hover::after {
+      animation-name: underline-animation; animation-duration: .7s; animation-fill-mode: forwards;
+    }
+    &:after {
+      background-color: $color-black; width: 100%; height: .1rem; content: ""; position: absolute; bottom: 0; right: 0;
+    }
+  }
+  &.text-uppercase {
+    font-size: 1.1rem; font-weight: 600;
+  }
+  .appendix {
+    opacity: .4; margin-left: .5rem;
+  }
+  &.link {
+    color: $color-default;
+  }
+  &.nav-link {
+    &.active {
+      color: $color-default;
+      i {
+        color: $color-default; opacity: 1;
+      }
+    }
+    i {
+      color: inherit; opacity: .3;
+    }
+  }
+}
+
+body, html {
+  margin: 0; padding: 0; font-family: 'Poppins', sans-serif; font-weight: 500; position: relative;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.4rem; background-color: #f2f2f2; height: 100%;  overflow-x: hidden;
+}
+
+dl {
+  margin-bottom: 1rem;
+  dt {
+    float: left; padding: .2rem 0;
+  }
+  dd {
+    text-align: right; padding: .2rem 0;
+  }
+}
+
+h1 {
+  font-family: 'Varela Round', sans-serif; font-size: 3.6rem;
+}
+
+h2 {
+  font-family: 'Varela Round', sans-serif; font-size: 2.4rem; margin-bottom: 4rem; padding-top: 1rem;
+}
+
+h3 {
+  font-family: 'Varela Round', sans-serif; font-size: 1.8rem; margin-bottom: 2rem;
+}
+h4 {
+  &.location {
+    &:before {
+      font-family: 'fontawesome'; content: "\f041"; position: relative; font-size: 1.3rem; opacity: .6; margin-right: .2rem;
+    }
+  }
+}
+
+hr {
+  margin-top: 2rem; margin-bottom: 2rem;
+}
+
+figure {
+  &.with-icon {
+    position: relative; padding-left: 2.5rem;
+    i {
+      color: $color-default; position: absolute; line-height: 2rem; left: 0;
+    }
+  }
+}
+
+mark, .mark {
+  background-color: #ffdc23;
+}
+
+p {
+  opacity: .65; font-weight: normal;
+}
+
+ul, ol, dl {
+  &.columns-2 {
+    column-count: 2;
+    dd, li {
+      margin-right: 1rem;
+    }
+  }
+  &.columns-3 {
+    column-count: 3;
+    dd, li {
+      margin-right: 1rem;
+    }
+  }
+  &.columns-4 {
+    column-count: 4;
+    dd, li {
+      margin-right: 1rem;
+    }
+  }
+  &.features-checkboxes {
+    padding-left: 0; list-style: none;
+    li {
+      margin-bottom: 1.5rem; position: relative; padding-left: 4rem;
+      &:before {
+        width: 2rem; height: 2rem; background-color: $color-default; border-radius: .3rem; content: ""; display: inline-block; position: absolute; left: 0;
+      }
+      &:after {
+        font-family: 'fontawesome'; color: $color-white; content: "\f00c"; position: absolute;  line-height: 1.8rem; font-size: 1rem; left: .5rem; top: 0;
+      }
+    }
+  }
+}
+
+section {
+  position: relative;
+}
+
+header, footer {
+  position: relative;
+}
