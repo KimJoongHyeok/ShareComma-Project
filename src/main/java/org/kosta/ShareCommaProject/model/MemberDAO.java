@@ -135,6 +135,21 @@ public class MemberDAO {
 			closeAll(pstmt, con);
 		}
 	}
+	
+	public void becomeMember(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = dataSource.getConnection();
+			String sql ="update member set member_status='MEMBER' where member_id= ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		}finally {
+			closeAll(pstmt, con);
+		}
+	}
+	
 	public MemberVO getMemberById(String id) throws SQLException {	
 		MemberVO mvo = null;
 		Connection con = null;
