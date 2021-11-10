@@ -1,42 +1,50 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
-<h1>숙소리스트</h1>
-<br>
-<div class="container">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>숙소사진</th>
-				<th>숙소이름</th>
-				<th>지역</th>
-				<th>호스트</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${requestScope.list}" var="hvo">
-				<tr>
-					<td>
-					    <img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}"   onerror="this.src='${pageContext.request.contextPath}/image/imguploadzhong.jpg'"  height="280" width="180" /> 
-					     
- 					</td>
-					<td>
-						<c:choose>
-							<c:when test="${sessionScope.mvo!=null}">
-								<a href="HouseDetailController.do?houseId=${hvo.houseId}">${hvo.houseName}</a>
-							</c:when>
-							<c:otherwise>
-		  			 			${hvo.houseName}
-		  					</c:otherwise>
-						</c:choose>
-					</td>
-					<td>${hvo.houseAddress }</td>
-					<td>${hvo.memberVO.name }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-</div>
-
+<section class="content">
+	<section class="block">
+		<div class="container">
+			<div class="items grid compact grid-xl-4-items grid-lg-3-items grid-md-2-items">
+				<c:forEach items="${requestScope.list}" var="hvo">
+					<div class="item">
+						<div class="wrapper">
+							<div class="image">
+								<h3>
+									<a href="#" class="tag category">Home & Decor</a> 
+									<a href="HouseDetailController.do" class="title">${hvo.houseName }</a>
+									<span class="tag">Share</span>
+								</h3>
+								<a href="HouseDetailController.do" > 
+									<img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="">
+								</a>
+							</div>
+							<!--end image-->
+							<h4 class="location">
+								<a href="#">${hvo.houseAddress }</a>
+							</h4>
+							<div class="price">$80</div>
+							<div class="meta">
+								<figure>
+									<i class="fa fa-calendar-o"></i>${hvo.houseTimePosted}
+								</figure>
+								<figure>
+									<a href="#"> <i class="fa fa-user"></i>${hvo.memberVO.name }
+									</a>
+								</figure>
+							</div>
+							<!--end meta-->
+							<div class="description">
+								<p>${hvo.houseContent }</p>
+							</div>
+							<!--end description-->
+							<a href="HouseDetailController.do" class="detail text-caps underline">Detail</a>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</section>
+</section>
