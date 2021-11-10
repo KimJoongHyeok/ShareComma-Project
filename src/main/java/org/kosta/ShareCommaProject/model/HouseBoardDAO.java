@@ -141,19 +141,14 @@ public class HouseBoardDAO {
 		ResultSet rs = null;
 		try {
 			con = dataSource.getConnection();
-			String sql="select h.house_id,h.house_name,h.house_address,h.house_content,\r\n"
-					+ "			to_char(h.house_time_posted,'yyyy.mm.dd'),m.member_name,hi.filename,hi.filepath\r\n"
-					+ "from house h \r\n"
-					+ "inner join member m on m.member_id =h.member_id \r\n"
-					+ "left outer join house_image hi on h.house_id=hi.house_id\r\n"
-					+ "order by h.house_id asc";
-//			StringBuilder sql = new StringBuilder();
-//			sql.append("select h.house_id,h.house_name,h.house_address,h.house_content, ");
-//			sql.append("to_char(h.house_time_posted,'yyyy.mm.dd'),m.member_name,hi.filename,hi.filepath ");
-//			sql.append("from house h  ");
-//			sql.append("inner join member m on m.member_id =h.member_id  ");
-//			sql.append("order by h.house_id asc");
-			pstmt = con.prepareStatement(sql);
+			StringBuilder sql = new StringBuilder();
+			sql.append("select h.house_id,h.house_name,h.house_address,h.house_content, ");
+			sql.append("to_char(h.house_time_posted,'yyyy.mm.dd') as house_time_posted,m.member_name,hi.filename,hi.filepath ");
+			sql.append("from house h ");
+			sql.append("inner join member m on m.member_id =h.member_id ");
+			sql.append("left outer join house_image hi on h.house_id=hi.house_id ");
+			sql.append("order by h.house_id asc ");
+			pstmt = con.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				HouseVO hvo = new HouseVO();
@@ -161,7 +156,7 @@ public class HouseBoardDAO {
 				hvo.setHouseName(rs.getString("house_name"));
 				hvo.setHouseAddress(rs.getString("house_address"));
 				hvo.setHouseContent(rs.getString("house_content"));
-				//hvo.setHouseTimePosted(rs.getString("house_time_posted"));
+				hvo.setHouseTimePosted(rs.getString("house_time_posted"));
 				hvo.setHouseHits(null);
 				MemberVO mvo = new MemberVO();
 				ImageVO ivo=new ImageVO();
@@ -171,7 +166,6 @@ public class HouseBoardDAO {
 				
 				hvo.setMemberVO(mvo);
 				hvo.setImageVO(ivo);
-				
 				
 				list.add(hvo);
 			}
