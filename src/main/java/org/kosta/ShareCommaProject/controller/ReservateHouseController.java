@@ -19,11 +19,9 @@ public class ReservateHouseController implements Controller {
 			return "redirect:HouseListController.do";
 		}
 		MemberVO mvo=(MemberVO)session.getAttribute("mvo");
-//		HouseVO hvo=(HouseVO)request.getAttribute("hvo");
-		String hid=request.getParameter("hid");
-		System.out.println("RHC도착"+hid);
-		HouseVO hvo=new HouseVO(hid,null,null,null,null,null,null,null);
-		System.out.println(request.getParameter("hid"));
+		String houseId=request.getParameter("houseId");
+	
+		HouseVO hvo=new HouseVO(houseId,null,null,null,null,null,null,null); 
 		int count=	Integer.parseInt(request.getParameter("count"));
 		ReservationVO rvo=new ReservationVO(request.getParameter("checkIn"),request.getParameter("checkOut"),count,null,mvo,hvo);
 		ReservationDAO.getInstance().reservateHouse(rvo);		

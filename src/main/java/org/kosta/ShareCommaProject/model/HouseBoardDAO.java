@@ -35,9 +35,9 @@ public class HouseBoardDAO {
 
 	public String registHouse(HouseVO hvo) throws SQLException {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt = null;		
+		String hid=null;
 
-		String hid = null;
 		try {
 			con = dataSource.getConnection();
 			String sql = "insert into house values(seq_house.nextval,?,?,?,sysdate,?)";
@@ -55,48 +55,48 @@ public class HouseBoardDAO {
 	}
 
 	public HouseVO getHouseById(String id) throws SQLException {
-		HouseVO hvo = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			System.out.println(id + "search 시작");
-			con = dataSource.getConnection();
-			StringBuilder sql = new StringBuilder();
-			sql.append("select h.*,m.member_name,m.member_nickname,m.member_phone, ");
-			sql.append("hm.filename,hm.filepath from house h ");
-			sql.append("inner join member m on m.member_id = h.member_id ");
-			sql.append("left outer join house_image hm on h.house_id=hm.house_id and h.house_id=?");
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				hvo = new HouseVO();
-				hvo.setHouseId(rs.getString(1));
-				hvo.setHouseName(rs.getString(2));
-				hvo.setHouseAddress(rs.getString(3));
-				hvo.setHouseContent(rs.getString(4));
-				hvo.setHouseTimePosted(rs.getString(5));
-				hvo.setHouseHits(null);
-				MemberVO mvo = new MemberVO();
-				mvo.setId(rs.getString("member_id"));
-				mvo.setName(rs.getString("member_name"));
-				mvo.setNickName(rs.getString("member_nickname"));
-				mvo.setPhone(rs.getString("member_phone"));
 
-				hvo.setMemberVO(mvo);
-				ImageVO ivo = new ImageVO();
-				ivo.setFilePath(rs.getString("filepath"));
-				ivo.setFileName(rs.getString("filename"));
-				hvo.setImageVO(ivo);
-
-			}
-		} finally {
-				closeAll(rs, pstmt, con);
-		}
-		return hvo;
-	}
-
+	      HouseVO hvo = null;
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      try {
+	         System.out.println(id + "search 시작");
+	         con = dataSource.getConnection();
+	         StringBuilder sql = new StringBuilder();
+	         sql.append("select h.house_id,h.house_name,h.house_address,h.house_content,to_char(h.house_time_posted,'yyyy.mm.dd') as house_time_posted ");
+	         sql.append(" ,m.member_name,m.member_nickname,m.member_phone, m.member_id, ");
+	         sql.append(" hm.filename,hm.filepath from house h	 ");
+	         sql.append(" inner join member m on m.member_id =h.member_id ");
+	         sql.append(" left outer join house_image hm on h.house_id=hm.house_id and h.house_id=?");	       
+	         pstmt = con.prepareStatement(sql.toString());	
+	         pstmt.setString(1, id);
+	         rs = pstmt.executeQuery();
+	         if (rs.next()) {
+	            hvo = new HouseVO();
+	            hvo.setHouseId(rs.getString(1));       
+	            hvo.setHouseName(rs.getString(2));  
+	            hvo.setHouseAddress(rs.getString(3));       
+	            hvo.setHouseContent(rs.getString(4));       
+	            hvo.setHouseTimePosted(rs.getString(5));        
+	            hvo.setHouseHits(null);
+	            MemberVO mvo = new MemberVO();
+	            mvo.setId(rs.getString("member_id"));        
+	            mvo.setName(rs.getString("member_name"));       
+	            mvo.setNickName(rs.getString("member_nickname"));        
+	            mvo.setPhone(rs.getString("member_phone"));      
+	            hvo.setMemberVO(mvo);
+	            ImageVO ivo=new ImageVO();
+	            ivo.setFileName(rs.getString(10));
+	            ivo.setFilePath(rs.getString(11));
+	            hvo.setImageVO(ivo);
+	         }
+	     } finally {
+	         closeAll(rs, pstmt, con);
+	      }
+	      return hvo;
+	   }
+	
 	public String getHouseId() throws SQLException {
 		// TODO Auto-generated method stub
 		Connection con = null;
@@ -168,10 +168,10 @@ public class HouseBoardDAO {
 				ImageVO ivo = new ImageVO();
 				mvo.setName(rs.getString("member_name"));
 				ivo.setFileName(rs.getString("filename"));
-				ivo.setFilePath(rs.getString("filepath"));
 
+				ivo.setFilePath(rs.getString("filepath"));				
 				hvo.setMemberVO(mvo);
-				hvo.setImageVO(ivo);
+				hvo.setImageVO(ivo);				
 
 				list.add(hvo);
 			}

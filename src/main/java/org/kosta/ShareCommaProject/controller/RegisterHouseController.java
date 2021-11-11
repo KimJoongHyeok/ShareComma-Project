@@ -46,41 +46,23 @@ public class RegisterHouseController implements Controller {
 			Random ran=new Random();
 			String sran=String.valueOf(ran.nextLong());
 			//filename+formatedNow+ran
-			
 			MemberVO mvo=(MemberVO)session.getAttribute("mvo");
-			//login Session.mvo MemberVO 값받아오기 이후 수정
-//			HouseVO hvo=new HouseVO("1",request.getParameter("name"),request.getParameter("address"),request.getParameter("content"),null,null,null,(MemberVO)request.getSession(false).getAttribute("mvo"));
-			
-			
-			
-			//---------------------------------------------------
-			
-//			String savePath = request.getServletContext().getRealPath("image");
-			String savePath= "C:/kosta224/web-workspace2/ShareComma-Project/src/main/webapp/upload/";
-			
-				System.out.println(savePath);
+			//---------------------------------------------------			
+			String savePath= "C:/kosta224/web-workspace2/ShareComma-Project/src/main/webapp/upload";			
 			try {
 				multi = new MultipartRequest(request, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
 				hvo=new HouseVO("null",multi.getParameter("name"),multi.getParameter("address"),multi.getParameter("content"),null,null,null,mvo);
 				 
-				System.out.println("test 값:"+multi.getParameter("name"));
-				System.out.println("file저장 실행");
-				System.out.println("try문");
 			} catch (Exception e) {
-				System.out.println("에러나옴");
 				e.printStackTrace();
 			}
-			System.out.println("세션존재");
-//--------------------------------------------------------------------------------------------------------
+			//--------------------------------------------------------------------------------------------------------
 
-			String filename = multi.getFilesystemName("filename");// 저장된 파일명
-			
+			String filename = multi.getFilesystemName("filename");// 저장된 파일명			
 			String t1=filename.substring(0,filename.lastIndexOf("."));
 			String t2=filename.substring(filename.lastIndexOf("."), filename.length());
-			String ssran =sran.substring(5);
- 
-			filename=t1+formatedNow+ssran+t2;
-			
+			String ssran =sran.substring(5); 
+			filename=t1+formatedNow+ssran+t2;		
 			
 			/*
 			 * 만약 filename이 없다면 파일이 없는거임. 따라서 아래 else구문의 multi 객체를 통해 orgName(원래파일명)과
@@ -91,61 +73,18 @@ public class RegisterHouseController implements Controller {
 				return "redirect:error.jsp";
 			} else {
 				File file=multi.getFile("filename");
-				 
-				
 				file.renameTo(new File (savePath+"/"+t1+formatedNow+ssran+t2));
 				String orgName = multi.getOriginalFileName("filename");
 				long fileSize = multi.getFile("filename").length();
-				System.out.println(orgName + "," + filename + "," + fileSize);
-				System.out.println("++++++++++++++++++");
-				System.out.println(savePath);
-				 
-				/*
-				 * inserFile메서드를 통해 filedb에 db정보들을 삽입 시킴.
-				 */
-				
-				
-				System.out.println(hvo);
-				System.out.println("++++++++"+hvo.getHouseAddress()+"+++++++++++++++++");//null값나옴
-				//-------------------------------------------------
-				
 				HouseBoardDAO.getInstance().registHouse(hvo);
 				hvo.setHouseId(HouseBoardDAO.getInstance().getHouseId());			
 				
 			 //---------------------------------------------------------------
 				ImageDAO.getInstance().insertImage(hvo,orgName, filename, savePath, fileSize);
-				System.out.println("upload완료");
-				// filedb 모두 조회.
-				// ArrayList<ImageVO> list = ImageDAO.getInstance().getAllFile();
-
-				/*
-				 * fvo 객체 만들고 ImageDAO.getFile(postNo, filename) 메서드로 저장한 파일명에 해당하는 정보들을 조회한뒤 있으면
-				 * fvo객체에 넣어줌. 넣어주는 이유는 아래 return값을 통한 page 이동시 redirect로 이동해서 이동한 Controller or
-				 * jsp 에서는 request 를 할 수 없음. 따라서 쿼리스트링으로 fvo값을 return값에 넣어줌.
-				 */
 				ImageVO Ivo = new ImageVO();
 				Ivo = ImageDAO.getInstance().getImage(hvo);
-				
-				
-				
-				System.out.println("***********************");
-				
-				System.out.println("**이상확인*********************");
-				System.out.println("filePath:"+Ivo.getFilePath().toString());//file Path확인
-				System.out.println("fileName:"+Ivo.getFileName().toString());//file Path확인
-				//System.out.println("fileSize:"+Ivo.getFileSize().toString());//file Path확인
-				System.out.println("fileOrgName:"+Ivo.getOrgName().toString());//file Path확인
-				System.out.println("***********************");
-				
-				request.setAttribute("ivo", Ivo);//redirect시 쿼리스트링 이용해야댐 중요 x1000
-
-//				return "redirect:"+contr+"Controller.do?postNo="+pvo.getPostNo()+"&fileName="+Ivo.getFileName();
-				
-				
-//				이후 경로 수정 
+				request.setAttribute("ivo", Ivo); 
 				return "redirect:HouseListController.do";
-//				return "redirect:fileout.jsp";//->request값 전달 불가 쿼리스트링 이용바람
-//				return "redirect:fileout.jsp";//->request값 전달 불가 쿼리스트링 이용바람
 			}
 		}
 	}
