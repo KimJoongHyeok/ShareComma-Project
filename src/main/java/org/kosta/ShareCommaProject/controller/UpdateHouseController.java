@@ -23,7 +23,7 @@ public class UpdateHouseController implements Controller {
 		// TODO Auto-generated method stub
 		MultipartRequest multi = null;
 		int sizeLimit=10*1024*1024;
-		String savePath= "C:/kosta224/web-workspace2/ShareComma-Project/src/main/webapp/upload/";
+		String savePath= "C:/kosta224/web-workspace2/ShareComma-Project/src/main/webapp/upload";
 		
 		System.out.println(savePath);
 		HouseVO hvo=null;
@@ -84,7 +84,7 @@ public class UpdateHouseController implements Controller {
 		
 		
 //		이후 경로 수정 
-		return "header.jsp";
+		return "HouseListController.do";
 //		return "redirect:fileout.jsp";//->request값 전달 불가 쿼리스트링 이용바람
 //		return "redirect:fileout.jsp";//->request값 전달 불가 쿼리스트링 이용바람
 	}
