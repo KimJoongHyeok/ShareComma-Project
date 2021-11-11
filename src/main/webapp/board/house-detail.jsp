@@ -27,11 +27,9 @@
 			<%-- 숙소사진띄워주는부분 --%>
 
 			<label for="숙소 사진" class="col-form-label required">Gallery</label><br> 
-
-			<img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="에러"
-
-				<%-- onerror="this.src='${pageContext.request.contextPath}/image/imguploadzhong.jpg'" --%>
-				height="200" width="220" />			 
+  			 <img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="" width=100%; height=100%>
+                        
+			 	 ${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}
 			<hr>
 			<!-- <button type = " "></button> -->
 			<br>					
@@ -39,7 +37,10 @@
 	</form>
 	<c:choose>
 		<c:when test="${hvo.memberVO.id==sessionScope.mvo.id}">
-			<a href="UpdateHouseFormController.do?hid= ${hvo.houseId }">수정하기</a>
+	 		<form action="UpdateHouseFormController.do" method="post">
+				<button type="submit"  class="btn btn-primary" >수정하기</button>
+				 <input type="hidden" name="hid" value="${hvo.houseId}">	
+			</form>
 		</c:when>
 		<c:otherwise>
 		<form action="ReservateHouseFormController.do" method="post">
