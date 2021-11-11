@@ -9,21 +9,25 @@
 					<table class="table">
 						<tr>
 							<td>
-								<input type="text" name="name" value = "예약자 : ${sessionScope.mvo.name } 님" readonly="readonly">
+								<label class="col-form-label required">예약자이름</label>
+								<input type="text" name="name" value = "${sessionScope.mvo.name } 님" readonly="readonly">
 							</td>
 						</tr>
 						<tr>
 							<td>
+								<label class="col-form-label required">체크인날짜</label>
 								<input type="date" name="checkIn" required="required">
 							</td>
 						</tr>
 						<tr>
 							<td>
+								<label class="col-form-label required">체크아웃날짜</label>
 								<input type="date" name="checkOut" required="required">
 							</td>
 						</tr>
 						<tr>
 							<td>
+								<label class="col-form-label required">인원수</label>
 								<input type="number" name="count" required="required" placeholder="인원수">
 							</td>
 						</tr>		
