@@ -23,7 +23,7 @@ public class UpdateHouseController implements Controller {
 		// TODO Auto-generated method stub
 		MultipartRequest multi = null;
 		int sizeLimit=10*1024*1024;
-		String savePath= "C:/kosta224/web-workspace2/ShareComma-Project/src/main/webapp/upload/";
+		String savePath= "C:/kosta224/web-workspace2/ShareComma-Project/src/main/webapp/upload";
 		
 		System.out.println(savePath);
 		HouseVO hvo=null;

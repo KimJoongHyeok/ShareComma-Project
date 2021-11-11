@@ -34,11 +34,13 @@
 											href="HouseListController.do">홈</a></li>
 										<c:if test="${sessionScope.mvo.status eq 'HOST'}">
 											<li class="nav-item "><a class="nav-link" href="RegisterHouseFormController.do">숙소등록</a></li>
-										</c:if>
+										</c:if>	
+										<li class="nav-item "><a class="nav-link" href="ReservationListController.do">예약리스트보기</a></li>
 										<li class="nav-item "><a class="nav-link" href="UpdateMemberFormController.do">회원정보수정</a></li>
 										<li class="nav-item "><a class="nav-link" href="javascript:logout()">로그아웃</a></li>
 										<li class="nav-item btn btn-primary text-caps btn-rounded btn-framed"><b><i class="fa fa-user"></i> &nbsp; ${sessionScope.mvo.name }
 												님</b></li>
+									
 									</ul>
 									<script>
 										function logout() {
