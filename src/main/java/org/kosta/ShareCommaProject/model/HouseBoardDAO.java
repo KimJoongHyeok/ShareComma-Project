@@ -36,8 +36,8 @@ public class HouseBoardDAO {
 	public String registHouse(HouseVO hvo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
-		String hid=null;
+
+		String hid = null;
 		try {
 			con = dataSource.getConnection();
 			String sql = "insert into house values(seq_house.nextval,?,?,?,sysdate,?)";
@@ -47,7 +47,7 @@ public class HouseBoardDAO {
 			pstmt.setString(3, hvo.getHouseContent());
 			pstmt.setString(4, hvo.getMemberVO().getId());
 			pstmt.executeUpdate();
-			
+
 		} finally {
 			closeAll(pstmt, con);
 		}
@@ -55,56 +55,61 @@ public class HouseBoardDAO {
 	}
 
 	public HouseVO getHouseById(String id) throws SQLException {
-		// TODO Auto-generated method stub
-		HouseVO hvo = new HouseVO();
-		MemberVO mvo = null;
-		ImageVO ivo = null;
+		HouseVO hvo = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			System.out.println(id + "search 시작");
 			con = dataSource.getConnection();
-			String sql = "select h.*,m.member_name,m.member_nickname,m.member_phone,hm.image_id,hm.filepath from house h inner join member m on m.member_id =h.member_id left outer join house_image hm on h.house_id=hm.house_id and h.house_id=?";
-			// 검색결과
-			// 하우스(id,name,address,content,house_time_posted)멤버(id,name,phone,nickname,)
-			// 이미지 (id,houseid,orgname,filename,filepath,filesize)
-			pstmt = con.prepareStatement(sql);
+			StringBuilder sql = new StringBuilder();
+			sql.append("select h.*,m.member_name,m.member_nickname,m.member_phone, ");
+			sql.append("hm.filename,hm.filepath from house h ");
+			sql.append("inner join member m on m.member_id = h.member_id ");
+			sql.append("left outer join house_image hm on h.house_id=hm.house_id and h.house_id=?");
+			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
+				hvo = new HouseVO();
 				hvo.setHouseId(rs.getString(1));
 				hvo.setHouseName(rs.getString(2));
 				hvo.setHouseAddress(rs.getString(3));
 				hvo.setHouseContent(rs.getString(4));
 				hvo.setHouseTimePosted(rs.getString(5));
 				hvo.setHouseHits(null);
-				// mvo=new
-				// MemberVO(rs.getString(6),null,rs.getString(7),rs.getString(8),rs.getString(9),null,null);
-				hvo.setMemberVO(null);
-				// ivo=new
-				// ImageVO(null,rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14));
-				hvo.setImageVO(null);
+				MemberVO mvo = new MemberVO();
+				mvo.setId(rs.getString("member_id"));
+				mvo.setName(rs.getString("member_name"));
+				mvo.setNickName(rs.getString("member_nickname"));
+				mvo.setPhone(rs.getString("member_phone"));
+
+				hvo.setMemberVO(mvo);
+				ImageVO ivo = new ImageVO();
+				ivo.setFilePath(rs.getString("filepath"));
+				ivo.setFileName(rs.getString("filename"));
+				hvo.setImageVO(ivo);
 
 			}
-			System.out.println("test1 단계 성공");
 		} finally {
-			closeAll(rs, pstmt, con);
+				closeAll(rs, pstmt, con);
 		}
 		return hvo;
 	}
+
 	public String getHouseId() throws SQLException {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String hid=null;
+		String hid = null;
 		try {
-		    con = dataSource.getConnection();
-			String sql = "select max(house_id) from house";			
-			pstmt = con.prepareStatement(sql);	
+			con = dataSource.getConnection();
+			String sql = "select max(house_id) from house";
+			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			if (rs.next())hid=rs.getString(1); 			 
+			if (rs.next())
+				hid = rs.getString(1);
 		} finally {
 			closeAll(rs, pstmt, con);
 		}
@@ -135,7 +140,7 @@ public class HouseBoardDAO {
 	}
 
 	public ArrayList<HouseVO> getHouseList() throws SQLException {
-		ArrayList<HouseVO>list = new ArrayList<HouseVO>();
+		ArrayList<HouseVO> list = new ArrayList<HouseVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -143,14 +148,15 @@ public class HouseBoardDAO {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append("select h.house_id,h.house_name,h.house_address,h.house_content, ");
-			sql.append("to_char(h.house_time_posted,'yyyy.mm.dd') as house_time_posted,m.member_name,hi.filename,hi.filepath ");
+			sql.append(
+					"to_char(h.house_time_posted,'yyyy.mm.dd') as house_time_posted,m.member_name,hi.filename,hi.filepath ");
 			sql.append("from house h ");
 			sql.append("inner join member m on m.member_id =h.member_id ");
 			sql.append("left outer join house_image hi on h.house_id=hi.house_id ");
 			sql.append("order by h.house_id asc ");
 			pstmt = con.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				HouseVO hvo = new HouseVO();
 				hvo.setHouseId(rs.getString("house_id"));
 				hvo.setHouseName(rs.getString("house_name"));
@@ -159,17 +165,17 @@ public class HouseBoardDAO {
 				hvo.setHouseTimePosted(rs.getString("house_time_posted"));
 				hvo.setHouseHits(null);
 				MemberVO mvo = new MemberVO();
-				ImageVO ivo=new ImageVO();
+				ImageVO ivo = new ImageVO();
 				mvo.setName(rs.getString("member_name"));
 				ivo.setFileName(rs.getString("filename"));
 				ivo.setFilePath(rs.getString("filepath"));
-				
+
 				hvo.setMemberVO(mvo);
 				hvo.setImageVO(ivo);
-				
+
 				list.add(hvo);
 			}
-		}finally {
+		} finally {
 			closeAll(pstmt, con);
 		}
 		return list;
