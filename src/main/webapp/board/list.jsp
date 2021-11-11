@@ -14,10 +14,10 @@
 							<div class="image">
 								<h3>
 									<a href="#" class="tag category">Home & Decor</a> 
-									<a href="HouseDetailController.do" class="title">${hvo.houseName }</a>
+									<a href="HouseDetailController.do?houseId=${hvo.houseId}" class="title">${hvo.houseName }</a>
 									<span class="tag">Share</span>
 								</h3>
-								<a href="HouseDetailController.do" > 
+								<a href="HouseDetailController.do?houseId=${hvo.houseId}" > 
 									<img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="">
 								</a>
 							</div>
@@ -40,7 +40,7 @@
 								<p>${hvo.houseContent }</p>
 							</div>
 							<!--end description-->
-							<a href="HouseDetailController.do" class="detail text-caps underline">Detail</a>
+							<a href="HouseDetailController.do?houseId=${hvo.houseId}" class="detail text-caps underline">Detail</a>
 						</div>
 					</div>
 				</c:forEach>
