@@ -9,7 +9,7 @@
 			<div class="container">
 				<nav class="navbar navbar-expand-lg navbar-light justify-content-between">
 					<a class="navbar-brand" href="HouseListController.do"> 
-						<img src="assets/img/logo10.png" alt="">
+						<img src="assets/img/logo16.png" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbar" aria-controls="navbar" aria-expanded="false"
