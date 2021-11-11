@@ -14,6 +14,7 @@ public class HouseDetailController implements Controller {
 		String houseId=request.getParameter("houseId");
 		HouseVO hvo = HouseBoardDAO.getInstance().getHouseById(houseId);
 		request.setAttribute("hvo", hvo);
+		System.out.println(hvo);
 		request.setAttribute("url", "board/house-detail.jsp");
 		return "layout.jsp";
 	}
