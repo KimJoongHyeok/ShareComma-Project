@@ -27,7 +27,9 @@
 			<%-- 숙소사진띄워주는부분 --%>
 
 			<label for="숙소 사진" class="col-form-label required">Gallery</label><br> 
+
 			<img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="에러"
+
 				<%-- onerror="this.src='${pageContext.request.contextPath}/image/imguploadzhong.jpg'" --%>
 				height="200" width="220" />			 
 			<hr>

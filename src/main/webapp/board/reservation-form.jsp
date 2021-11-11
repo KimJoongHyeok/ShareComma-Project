@@ -4,7 +4,9 @@
 <div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
+
 				<form action="ReservateHouseController.do" method="post">
+
 				
 					<table class="table">
 						<tr>
