@@ -25,21 +25,28 @@
 			<input class = "col-sm-4" type="text" name="text" required="required" value = "${hvo.memberVO.phone}" readonly="readonly"/>
 						
 			<%-- 숙소사진띄워주는부분 --%>
-
+			<div align="center" style="height:30rem;  padding-top: 5rem">
 			<label for="숙소 사진" class="col-form-label required">Gallery</label><br> 
 
 			<img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="에러"
 
 				<%-- onerror="this.src='${pageContext.request.contextPath}/image/imguploadzhong.jpg'" --%>
-				height="200" width="220" />			 
+				height="200" width="220" />
+			</div>
+
 			<hr>
 			<!-- <button type = " "></button> -->
-			<br>					
 		</div>
 	</form>
-	<c:choose>
+<c:choose>
 		<c:when test="${hvo.memberVO.id==sessionScope.mvo.id}">
-			<a href="UpdateHouseFormController.do?hid= ${hvo.houseId }">수정하기</a>
+			<form action="UpdateHouseFormController.do" method="post">
+				<button type="submit" class="btn btn-primary small" style="width:15%" value="${hvo.houseId }">
+					수정하기<i class="fa fa-chevron-right"></i>&nbsp;
+				</button>
+				<br><br><br>
+				<%-- <a href="UpdateHouseFormController.do?hid= ${hvo.houseId }">수정하기</a> --%>
+			</form>
 		</c:when>
 		<c:otherwise>
 		<form action="ReservateHouseFormController.do" method="post">

@@ -41,10 +41,10 @@
 			<label for="숙소 소개" class="col-form-label required">Content</label>
 			<textarea rows="10" class="form-control" name="content" placeholder="집소개" required="required"></textarea>
 			<hr>
-			<button type="reset" class="btn btn-primary small " >
+			<button type="reset" class="btn btn-primary small " style= "width: 8%">
 				취소<i class="fa fa-chevron-right"></i> 
 			</button>
-			<button type="submit" class="btn btn-primary small" >
+			<button type="submit" class="btn btn-primary small" style= "width: 8%">
 				등록<i class="fa fa-chevron-right"></i>&nbsp;
 			</button>
 			<br>					

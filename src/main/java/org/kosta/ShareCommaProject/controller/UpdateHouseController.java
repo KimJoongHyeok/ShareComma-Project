@@ -84,7 +84,7 @@ public class UpdateHouseController implements Controller {
 		
 		
 //		이후 경로 수정 
-		return "header.jsp";
+		return "HouseListController.do";
 //		return "redirect:fileout.jsp";//->request값 전달 불가 쿼리스트링 이용바람
 //		return "redirect:fileout.jsp";//->request값 전달 불가 쿼리스트링 이용바람
 	}
