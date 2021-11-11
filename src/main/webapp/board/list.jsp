@@ -17,7 +17,7 @@
 									<a href="HouseDetailController.do?houseId=${hvo.houseId}" class="title">${hvo.houseName }</a>
 									<span class="tag">Share</span>
 								</h3>
-								<a href="HouseDetailController.do?houseId=${hvo.houseId}" > 
+								<a href="HouseDetailController.do?houseId=${hvo.houseId}&img=${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" >
 									<img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="">
 								</a>
 							</div>
