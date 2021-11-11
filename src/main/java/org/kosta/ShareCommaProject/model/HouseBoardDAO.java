@@ -89,6 +89,7 @@ public class HouseBoardDAO {
 	            ImageVO ivo=new ImageVO();
 	            ivo.setFileName(rs.getString(10));
 	            ivo.setFilePath(rs.getString(11));
+	            System.out.println(ivo);
 	            hvo.setImageVO(ivo);
 	         }
 	     } finally {
