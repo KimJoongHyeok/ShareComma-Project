@@ -13,6 +13,13 @@
 		<link rel="stylesheet" href="assets/css/selectize.css" type="text/css">
 		<link rel="stylesheet" href="assets/css/style.css">
 		<link rel="stylesheet" href="assets/css/user.css">
+		<style>
+			body {
+				background-image: url('image/santorini.jpg');
+				background-size: cover;
+				background-color : black;
+			}
+		</style>
 	<title>[ Share, ] </title>
 	</head>
 	<body>
