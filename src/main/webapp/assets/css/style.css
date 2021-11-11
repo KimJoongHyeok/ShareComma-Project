@@ -4029,7 +4029,7 @@ textarea.form-control {
     width: 140px;
     display: block;
     background: #ff0000;
-    box-shadow: $bs;
+    box-shadow: bs;
     position: absolute;
     top: 25px;
     left: -30px;
