@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<br>
+ <br>
 
 <h1><label for="숙소 이름" class="col-form-label required">숙소상세정보</label></h1>
 <hr>
 <div class="container">
-	<form action="ReservateHouseFormController.do" method="post" enctype="multipart/form-data" id = "reservationForm">
+	<form action="ReservateHouseFormController.do" method="post" id = "reservationForm">
 		<div class="form-group">
 			<br /> 
 			<input type="hidden" name="houseId" value="${hvo.houseId}">
@@ -27,10 +27,13 @@
 			<%-- 숙소사진띄워주는부분 --%>
 			<div align="center" style="height:30rem;  padding-top: 5rem">
 			<label for="숙소 사진" class="col-form-label required">Gallery</label><br> 
-			<img src="../${requestScope.img }"
+
+			<img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="에러"
+
 				<%-- onerror="this.src='${pageContext.request.contextPath}/image/imguploadzhong.jpg'" --%>
 				height="200" width="220" />
 			</div>
+
 			<hr>
 			<!-- <button type = " "></button> -->
 		</div>
@@ -46,11 +49,18 @@
 			</form>
 		</c:when>
 		<c:otherwise>
+		<form action="ReservateHouseFormController.do" method="post">
 			<button type="button"  class="btn btn-primary" onclick="reservation()">예약하기</button>
+			<input type="hidden" name="houseId" value="${hvo.houseId}">	
+		</form>	
 			<%-- <a href="ReservateHouseFormController.do?hid=${hvo.houseId}">예약하기</a> --%>
 		</c:otherwise>
 	</c:choose>
+	
 </div>
+
+
+
 <script>
 	function reservation(){
 		if(confirm("예약하시겠습니까?")){
@@ -58,9 +68,7 @@
 		}
 	}
 </script>
-<!-- 		 
-<div id="map" style="width:100%;height:350px;"></div>
-
+<!--   
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd4efbbcddc095d4dfa00d6f028dd788&libraries=services">
 //마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -116,6 +124,4 @@ function displayMarker(place) {
 }
 </script>
 
-<script>
-
-</script> -->
+  -->
