@@ -1795,7 +1795,7 @@ Headers:		'Varela Round', sans-serif;
     color: #ff0000;
 }
 .pricing ul li.not-available {
-    color: rgba(0,0,0,, .5);
+    color: rgba(0,0,0, .5);
 }
 .pricing.box {
     background-color: #fff;
