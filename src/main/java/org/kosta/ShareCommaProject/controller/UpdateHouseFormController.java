@@ -16,7 +16,7 @@ public class UpdateHouseFormController implements Controller {
 		
 		//houseID로 검색
 		//차후 수정사항 
-		String id="2";
+		String id=request.getParameter("hid");
 		request.setAttribute("hvo", HouseBoardDAO.getInstance().getHouseById(request.getParameter("id")));
 		
 		request.setAttribute("url", "board/update-house-form.jsp");
