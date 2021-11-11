@@ -14,12 +14,15 @@ public class ReservateHouseFormController implements Controller {
 		if (session == null || session.getAttribute("mvo") == null)
 			return "redirect:HouseListController.do";
 		
-		if (request.getMethod().equals("POST") == false)
-			throw new ServletException("예약하기는 post 방식만 허용됩니다");
+		/*
+		 * if (request.getMethod().equals("POST") == false) throw new
+		 * ServletException("예약하기는 post 방식만 허용됩니다");
+		 */
+		
 		
 		System.out.println(request.getParameter("hid")); 
 		request.setAttribute("url", "board/reservation-form.jsp");
-		request.setAttribute("hid", request.getParameter("hid"));
+		request.setAttribute("hid", request.getParameter("houseId"));
 		
 		return "layout.jsp";
 		
