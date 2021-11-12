@@ -34,24 +34,25 @@
       <div class="item active">
       	<img src="image/santorini.jpg" class="_oxzjdz9" alt="Greece" width="800" height="1000">
         <div class="carousel-caption">
+        <h1>전 세계 인기 체험</h1>
         <h3>산토리니</h3>
-        <p>HELLO!</p>
       </div>
       </div>
 
       <div class="item">
       	<img src="image/몰디브2.jpg" class="rounded" alt="Mauritius" width="800" height="1000" >
        <div class="carousel-caption">
-        <h3>몰디브</h3>
-        <p>Thank you, 몰디브!</p>
+       
+        <h1>해변 근처</h1>
+        <h3>몰디브<h3>
       </div>
       </div>
     
       <div class="item">
       	<img src="image/타히티 섬.jpg" class="rounded" alt="tahiti" width="800" height="1000">
         <div class="carousel-caption">
-        <h3>타히티 섬</h3>
-        <p>Thank you, TAHITI!</p>
+        <h1>Island</h1>
+        <h3>타히티섬</h3>
       </div>
       </div>
     </div>
