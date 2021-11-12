@@ -24,7 +24,7 @@
 				document.getElementById("id").focus();
 				document.getElementById("flag").value="";
 			}
-			
+
 		}
 		xhr.open("post", "IdCheckController.do");
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -78,7 +78,7 @@
 
 						<div class="d-flex justify-content-between align-items-baseline">
 							<label for="nick" class="col-form-label required">Your status</label>
-							<input type="radio" name="status" value="MEMBER">회원 
+							<input type="radio" name="status" value="MEMBER" checked="checked">회원 
 							<input type="radio" name="status" value="HOST"> 호스트
 						</div>
 						<br>
