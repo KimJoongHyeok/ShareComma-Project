@@ -46,16 +46,21 @@
    
 <c:choose>
       <c:when test="${hvo.memberVO.id==sessionScope.mvo.id}">
+			<div>
+			<form action="UpdateHouseFormController.do" method="post">
+				<button type="submit" class="btn btn-primary small " style= "width: 8%">수정하기</button><br><br>
+				 <input type="hidden" name="hid" value="${hvo.houseId}">
+			</form>
 
-          <form action="UpdateHouseFormController.do" method="post">
-            <button type="submit"  class="btn btn-primary" >수정하기</button><br><br><br>
-             <input type="hidden" name="hid" value="${hvo.houseId}">   
-
-      </form>
-      </c:when>
+			<form action="DeleteHouseController.do" method="post">
+				<button type="submit" class="btn btn-primary small " style= "width: 8%" onclick="delete()">삭제하기</button> 
+				<input type="hidden" name="hid" value="${hvo.houseId}">
+			</form>
+			</div>
+		</c:when>
       <c:otherwise>
       <form action="ReservateHouseFormController.do" method="post" >
-         <button type="button"  class="btn btn-primary" onclick="reservation()">예약하기</button><br><br><br>
+         <button type="button"  class="btn btn-primary small " style= "width: 8%" onclick="reservation()">예약하기</button> 
          <input type="hidden" name="houseId" value="${hvo.houseId}">   
       </form>   
          <%-- <a href="ReservateHouseFormController.do?hid=${hvo.houseId}">예약하기</a> --%>

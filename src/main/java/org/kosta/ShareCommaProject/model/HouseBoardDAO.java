@@ -181,5 +181,19 @@ public class HouseBoardDAO {
 		}
 		return list;
 	}
+	
+	public void deleteHouse(String hid) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = dataSource.getConnection();
+			String sql = "delete from house where house_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, hid);
+			pstmt.executeQuery();
+		} finally {
+			closeAll(pstmt, con);
+		}
+	}
 
 }
