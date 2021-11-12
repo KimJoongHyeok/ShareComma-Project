@@ -7,6 +7,7 @@
 <section class="content">
    <section class="block">
       <div class="container">
+       <c:import url="test2.jsp"></c:import><br>
          <div class="items grid compact grid-xl-4-items grid-lg-3-items grid-md-2-items">
             <c:forEach items="${requestScope.list}" var="hvo">
                <div class="item">
