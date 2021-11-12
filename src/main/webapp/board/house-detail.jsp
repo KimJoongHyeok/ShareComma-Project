@@ -6,64 +6,71 @@
 <h1><label for="숙소 이름" class="col-form-label required">숙소상세정보</label></h1>
 <hr>
 <div class="container">
-	<form action="ReservateHouseFormController.do" method="post" id = "reservationForm">
-		<div class="form-group">
-			<br /> 
-			<input type="hidden" name="houseId" value="${hvo.houseId}">
-			<label for="숙소 이름" class="col-form-label required">House Name</label>
-		    <input type="text" name="name" required="required" value = "${hvo.houseName}" readonly="readonly" /><br />
-		     
-		    <label for="숙소 주소" class="col-form-label required">Address</label> 
-		    <input type="text" name="address" required="required" value = "${hvo.houseAddress }" readonly="readonly"/>
-		    <label for="숙소 소개" class="col-form-label required">Content</label>
-			<textarea rows="10" class="form-control" name="content" required="required" readonly="readonly">${hvo.houseContent}</textarea>
-		    <br>
-		    <label for="호스트 닉네임" class="col-form-label required">Host NickName</label>
-		    <input class = "col-sm-4" type="text" name="address" required="required" value = "${hvo.memberVO.nickName }" readonly="readonly"/>
-			&nbsp; &nbsp;
-			<label for="호스트 전화번호" class="col-form-label required">Host PhoneNumber</label> 
-			<input class = "col-sm-4" type="text" name="text" required="required" value = "${hvo.memberVO.phone}" readonly="readonly"/>
-						
-			<%-- 숙소사진띄워주는부분 --%>
-			<div align="center" style="height:30rem;  padding-top: 5rem">
-			<label for="숙소 사진" class="col-form-label required">Gallery</label><br> 
+   <form action="ReservateHouseFormController.do" method="post" id = "reservationForm">
+      <div class="form-group">
+         <br /> 
+         
+         <%-- 숙소사진띄워주는부분 --%>
+         <div align="center" >
+         <div align="center"  style="height:70rem;  padding-top: 5rem">
+         <label for="숙소 사진" class="col-form-label required">Gallery</label><br> 
 
-  			 <img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="" width=100%; height=100%>
+            <img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="" style="width: 800; height: 600;">
                         
-			 	 ${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}
+             <%--  ${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName} --%>
 
-			<hr>
-			<!-- <button type = " "></button> -->
-		</div>
-	</form>
+            </div>
+
+         
+         <input type="hidden" name="houseId" value="${hvo.houseId}">
+         <label for="숙소 이름" class="col-form-label required">House Name</label>
+          <input type="text" name="name" required="required" value = "${hvo.houseName}" readonly="readonly" /><br />
+           
+          <label for="숙소 주소" class="col-form-label required">Address</label> 
+          <input type="text" name="address" required="required" value = "${hvo.houseAddress }" readonly="readonly"/>
+          <label for="숙소 소개" class="col-form-label required">Content</label>
+         <textarea rows="10" class="form-control" name="content" required="required" readonly="readonly">${hvo.houseContent}</textarea>
+          <br>
+          <label for="호스트 닉네임" class="col-form-label required">Host NickName</label>
+          <input class = "col-sm-4" type="text" name="address" required="required" value = "${hvo.memberVO.nickName }" readonly="readonly" style="width: 25%"/>
+         &nbsp; &nbsp;
+         <label for="호스트 전화번호" class="col-form-label required">Host PhoneNumber</label> 
+         <input class = "col-sm-4" type="text" name="text" required="required" value = "${hvo.memberVO.phone}" readonly="readonly"  style="width: 25%"/>
+                  
+         
+
+         <hr>
+         <!-- <button type = " "></button> -->
+      </div>
+   </form>
+   
 <c:choose>
-		<c:when test="${hvo.memberVO.id==sessionScope.mvo.id}">
+      <c:when test="${hvo.memberVO.id==sessionScope.mvo.id}">
 
-	 		<form action="UpdateHouseFormController.do" method="post">
-				<button type="submit"  class="btn btn-primary" >수정하기</button>
-				 <input type="hidden" name="hid" value="${hvo.houseId}">	
+          <form action="UpdateHouseFormController.do" method="post">
+            <button type="submit"  class="btn btn-primary" >수정하기</button><br><br><br>
+             <input type="hidden" name="hid" value="${hvo.houseId}">   
 
       </form>
-		</c:when>
-		<c:otherwise>
-		<form action="ReservateHouseFormController.do" method="post">
-			<button type="button"  class="btn btn-primary" onclick="reservation()">예약하기</button>
-			<input type="hidden" name="houseId" value="${hvo.houseId}">	
-		</form>	
-			<%-- <a href="ReservateHouseFormController.do?hid=${hvo.houseId}">예약하기</a> --%>
-		</c:otherwise>
-	</c:choose>
-	
+      </c:when>
+      <c:otherwise>
+      <form action="ReservateHouseFormController.do" method="post" >
+         <button type="button"  class="btn btn-primary" onclick="reservation()">예약하기</button><br><br><br>
+         <input type="hidden" name="houseId" value="${hvo.houseId}">   
+      </form>   
+         <%-- <a href="ReservateHouseFormController.do?hid=${hvo.houseId}">예약하기</a> --%>
+      </c:otherwise>
+   </c:choose>
 </div>
 
 
 
 <script>
-	function reservation(){
-		if(confirm("예약하시겠습니까?")){
-			document.getElementById("reservationForm").submit();
-		}
-	}
+   function reservation(){
+      if(confirm("예약하시겠습니까?")){
+         document.getElementById("reservationForm").submit();
+      }
+   }
 </script>
 <!--   
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd4efbbcddc095d4dfa00d6f028dd788&libraries=services">
