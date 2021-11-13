@@ -77,8 +77,7 @@ public class RegisterHouseController implements Controller {
 				String orgName = multi.getOriginalFileName("filename");
 				long fileSize = multi.getFile("filename").length();
 				HouseBoardDAO.getInstance().registHouse(hvo);
-				hvo.setHouseId(HouseBoardDAO.getInstance().getHouseId());			
-				
+				hvo.setHouseId(HouseBoardDAO.getInstance().getHouseId());	
 			 //---------------------------------------------------------------
 				ImageDAO.getInstance().insertImage(hvo,orgName, filename, savePath, fileSize);
 				ImageVO Ivo = new ImageVO();
