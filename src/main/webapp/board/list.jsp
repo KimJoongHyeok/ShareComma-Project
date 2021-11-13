@@ -15,12 +15,12 @@
                      <div class="image">
                         <h3>
                            <a href="#" class="tag category">Home & Decor</a> 
-                           <a href="HouseDetailController.do?houseId=${hvo.houseId}" class="title">${hvo.houseName }</a>
+                           <a href="HouseDetailController.do?houseId=${hvo.houseId }" class="title">${hvo.houseName }</a>
                            <span class="tag">Share</span>
                         </h3>
-                        <a href="HouseDetailController.do?houseId=${hvo.houseId}" > 
-                           <img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="" width=100%; height=100%>
-                            
+                        	<a href="HouseDetailController.do?houseId=${hvo.houseId}" > 
+                          <img src="${pageContext.request.contextPath}/upload/${hvo.imageVO.fileName}" alt="" width=100%; height=100%> 
+                         <%--    <img src="./upload/${hvo.imageVO.fileName}" alt="" width=100%; height=100%> --%>
                         </a>
                      </div>
                      <!--end image-->
@@ -30,7 +30,7 @@
                      <div class="price">$80</div>
                      <div class="meta">
                         <figure>
-                           <i class="fa fa-calendar-o"></i>${hvo.houseTimePosted}
+                           <i class="fa fa-calendar-o">${hvo.houseTimePosted}</i>
                         </figure>
                         <figure>
                            <a href="#"> <i class="fa fa-user"></i>${hvo.memberVO.name }
