@@ -66,9 +66,9 @@ public class HouseBoardDAO {
 	         StringBuilder sql = new StringBuilder();
 	         sql.append("select h.house_id,h.house_name,h.house_address,h.house_content,to_char(h.house_time_posted,'yyyy.mm.dd') as house_time_posted ");
 	         sql.append(" ,m.member_name,m.member_nickname,m.member_phone, m.member_id, ");
-	         sql.append(" hm.filename,hm.filepath from house h	 ");
+	         sql.append(" hm.filename,hm.filepath from (select * from house where house_id=?)  h	 ");
 	         sql.append(" inner join member m on m.member_id =h.member_id ");
-	         sql.append(" left outer join house_image hm on h.house_id=hm.house_id and h.house_id=?");	       
+	         sql.append(" left outer join house_image hm on h.house_id=hm.house_id ");	       
 	         pstmt = con.prepareStatement(sql.toString());	
 	         pstmt.setString(1, id);
 	         rs = pstmt.executeQuery();
