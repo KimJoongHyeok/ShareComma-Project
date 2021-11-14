@@ -2928,9 +2928,10 @@ label.required:after {
     bottom: 1.1rem;
 }
 .form-group label {
-    font-size: 1.3rem;
+    font-size: 2rem;
     margin-bottom: .8rem;
     font-weight: 600;
+    color: #BBCFF7;
 }
 .form-group label.framed {
     font-weight: normal;
